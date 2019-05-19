@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    {% for Article in categoryArticles %}
+
+        {{ Article.id }}: {{ Article.title }}<br>
+        {{ Article.content }}<br>
+
+    {% endfor %}
+
+{% endblock %}
