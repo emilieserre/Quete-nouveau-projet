@@ -1,16 +1,20 @@
 <?php
+
 // src/Controller/BlogController.php
 namespace App\Controller;
+
 use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 /**
  * class BlogController
  * @package App\Controller
  * @Route("/blog")
  */
+
 class BlogController extends AbstractController
 {
     /**
@@ -81,9 +85,7 @@ class BlogController extends AbstractController
             ->getDoctrine()->getRepository(Category::class)
             ->findOneBy(['name' => $categoryName]);
         $categoryArticles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findBy(['category'=>$category
-        ],['id'=>'DESC'] ,3);
+            ->$category->getArticles();
         return $this->render(
             'blog/category.html.twig', [
                 'categoryArticles' => $categoryArticles
