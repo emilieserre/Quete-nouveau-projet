@@ -7,6 +7,7 @@ use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * class BlogController
@@ -22,6 +23,7 @@ class BlogController extends AbstractController
      * @Route("/", name="blog_index")
      * @return Response A response instance
      */
+
     public function index(): Response
     {
         $articles = $this->getDoctrine()
@@ -37,6 +39,18 @@ class BlogController extends AbstractController
             ['articles' => $articles]
         );
     }
+
+    /**
+     * Getting a article with a formatted slug for title
+     *
+     * @param string $slug The slugger
+     *
+     * @Route("/{slug<^[a-z0-9-]+$>}",
+     *     defaults={"slug" = null},
+     *     name="blog_show")
+     * @return Response A response instance
+     */
+
     public function show(?string $slug): Response
     {
         if (!$slug) {
@@ -55,26 +69,29 @@ class BlogController extends AbstractController
                 'No article with ' . $slug . ' title, found in article\'s table.'
             );
         }
-        $category = $article->getCategory();
         return $this->render(
             'blog/show.html.twig',
             [
                 'article' => $article,
                 'slug' => $slug,
-                'category' => $category
             ]
         );
     }
+
     /**
-     * @return Response
-     * @Route("/show/{category_id}")
-     * @ParamConverter("category", class="App\Entity\Category", options={"id" = "category_id"})
+     * @param $category
+     * @Route("/category/{name}", name="show_category")
+     * @return Response A response instance
      */
-    public function showByCategory(Category $category)
+
+    public function showByCategory(category $category): Response
     {
-        $articles = $category->getArticles();
+        $categoryArticles = $category->getArticles();
         return $this->render(
-            'blog/category.html.twig', ['categoryArticles' => $articles,'category'=>$category]
+            'blog/category.html.twig', [
+                'categoryArticles' => $categoryArticles,
+                'category'=>$category
+            ]
         );
     }
 }

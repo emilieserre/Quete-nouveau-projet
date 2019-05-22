@@ -1,5 +1,4 @@
 <?php
-// src/Controller/DefaultController.php
 
 namespace App\Controller;
 
@@ -9,11 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-/**
-* @Route("/", name="app_index")
-*/
-public function index()
-{
-return $this->render('default.html.twig');
-}
+    /**
+     * @Route("/", name="app_index")
+     */
+
+    public function index()
+    {
+        return $this->render('default.html.twig', []);
+    }
 }

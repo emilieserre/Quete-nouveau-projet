@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
+
 class Category
 {
     /**
@@ -16,43 +17,29 @@ class Category
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
+
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100)
      */
+
     private $name;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="Category")
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
      */
-    private $articles;
 
+    private $articles;
     public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
 
     /**
-     * @return Collection/Article[]
+     * @return Collection|Article[]
      */
+
     public function getArticles(): Collection
     {
         return $this->articles;
@@ -65,7 +52,7 @@ class Category
 
     public function addArticle(Article $article): self
     {
-        if (!$this->articles->contains($article)){
+        if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
             $article->setCategory($this);
         }
@@ -81,11 +68,24 @@ class Category
     {
         if ($this->articles->contains($article)) {
             $this->articles->removeElement($article);
-            //set the owning side to null (unless already changed)
+            // set the owning side to null (unless already changed)
             if ($article->getCategory() === $this) {
                 $article->setCategory(null);
             }
         }
-            return $this;
-        }
+        return $this;
+    }
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
 }
