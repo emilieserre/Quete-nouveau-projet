@@ -1,6 +1,5 @@
 <?php
 
-// src/Controller/BlogController.php
 namespace App\Controller;
 
 use App\Entity\Article;
@@ -67,9 +66,9 @@ class BlogController extends AbstractController
         );
     }
     /**
-     *
      * @return Response
-     * @Route("/category/{name}", name="show_category")
+     * @Route("/show/{category_id}")
+     * @ParamConverter("category", class="App\Entity\Category", options={"id" = "category_id"})
      */
     public function showByCategory(Category $category)
     {
