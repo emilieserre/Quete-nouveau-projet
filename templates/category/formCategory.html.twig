@@ -1,9 +1,8 @@
-
 {% extends 'base.html.twig' %}
 
-{% block title %}Form{% endblock %}
+{% block title %}Formulaire{% endblock %}
 
-{% block content %}
+{% block body %}
     {{ form_start(form) }}
     {{ form_row(form.name) }}
     <button type="submit" name="btnSearch">Submit</button>
