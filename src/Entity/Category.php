@@ -1,15 +1,11 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
-
 class Category
 {
     /**
@@ -17,39 +13,30 @@ class Category
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-
     private $id;
-
     /**
      * @ORM\Column(type="string", length=100)
      */
-
     private $name;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
      */
-
     private $articles;
     public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
-
     /**
      * @return Collection|Article[]
      */
-
     public function getArticles(): Collection
     {
         return $this->articles;
     }
-
     /**
      * param Article $article
      * @return Category
      */
-
     public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -58,12 +45,10 @@ class Category
         }
         return $this;
     }
-
     /**
      * @param Article $article
      * @return Category
      */
-
     public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {

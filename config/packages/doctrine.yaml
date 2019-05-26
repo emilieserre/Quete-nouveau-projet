@@ -15,7 +15,7 @@ doctrine:
             charset: utf8mb4
             collate: utf8mb4_unicode_ci
 
-        url: '%env(DATABASE_URL)%'
+        url: '%env(resolve:DATABASE_URL)%'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -26,4 +26,4 @@ doctrine:
                 type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
-                alias: App
+alias: App

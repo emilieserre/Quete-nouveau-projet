@@ -1,5 +1,5 @@
 <?php
-
+// src/Controller/BlogController.php
 namespace App\Controller;
 use App\Entity\Article;
 use App\Entity\Category;
@@ -36,7 +36,8 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $data = $form->getData();
-
+            // $data contient les données du $_POST
+            // Faire une recherche dans la BDD avec les infos de $data...
         }
         return $this->render(
             'blog/index.html.twig', [
