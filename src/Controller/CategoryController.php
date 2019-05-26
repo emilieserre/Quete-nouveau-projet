@@ -1,40 +1,28 @@
 <?php
-
 namespace App\Controller;
-
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-
-/**
- * @Route("/category")
- */
-
 class CategoryController extends AbstractController
 {
     /**
-     * @param Request $request
-     * @return Response
-     * @Route("/new", name="blog_category")
+     * @Route("/category", name="category")
      */
-
-    public function addNewCategory(Request $request): Response
+    public function index(Request $request) : Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
         }
-        return $this->render('blog/new.html.twig', [
-                'category' => $category,
-                'form' => $form->createView()
-            ]
-        );
+        return $this->render('category/formCategory.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

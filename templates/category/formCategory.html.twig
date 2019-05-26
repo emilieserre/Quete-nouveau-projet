@@ -1,0 +1,11 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Form{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    <button type="submit" name="btnSearch">Submit</button>
+    {{ form_end(form) }}
+{% endblock %}
