@@ -22,4 +22,4 @@ monolog:
             type: filter
             handler: deprecation
             max_level: info
-            channels: ["php"]
+channels: ["php"]
