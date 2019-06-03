@@ -11,13 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class BlogController extends AbstractController
 {
     /**
-     * @Route("/blog", name="blog_index")
+     * @Route("/", name="blog_index")
      */
 
     public function index()
     {
-        return new Response(
-            '<html><body>Blog Index</body></html>'
-        );
+        return $this->render('base.html.twig', [
+            'owner' => 'Emilie',
+        ]);
     }
 }
