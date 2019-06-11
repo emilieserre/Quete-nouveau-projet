@@ -30,6 +30,14 @@
                 <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
+        <strong>Tags :</strong>
+        <ul>
+            {% for tag in article.tags %}
+                <li>{{ tag.name }} </li>
+            {% else %}
+                <li>No tags for this article</li>
+            {% endfor %}
+        </ul>
         </tbody>
     </table>
 

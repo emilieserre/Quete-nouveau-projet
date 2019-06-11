@@ -14,7 +14,7 @@ class BlogController extends AbstractController
     /**
      * Show all row from article's entity
      *
-     * @Route("/", name="app_index")
+     * @Route("/blog", name="app_index")
      * @return Response A response instance
      */
     public function index(): Response
@@ -75,9 +75,6 @@ class BlogController extends AbstractController
             ]
         );
     }
-
-
-
 
 }
 

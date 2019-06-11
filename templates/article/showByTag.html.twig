@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ tag.name }}
+    {% for article in tag.articles %}
+        <table class="table">
+        <tbody>
+        <tr>
+            <td>{{ article.id }}</td>
+            <td>{{ article.title }}</td>
+            <td>{{ article.content }}</td>
+        </tr>
+    {% else %}
+        <p>No articles for this tag</p>
+        </tbody>
+        </table>
+    {% endfor %}
+{% endblock %}
