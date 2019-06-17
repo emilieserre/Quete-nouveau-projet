@@ -3,9 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\DependencyInjection\Tests\Compiler\E;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class ArticleType extends AbstractType
 {
@@ -14,8 +19,11 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-//            ->add('category')
-        ;
+            ->add('category')
+            ->add('tags', EntityType::class, [
+            'class' => Tag::class,
+            'choice_label' => 'selector',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
