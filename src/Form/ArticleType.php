@@ -6,10 +6,12 @@ use App\Entity\Article;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\Tests\Compiler\E;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Entity\Tag;
 
 
 class ArticleType extends AbstractType
@@ -18,11 +20,11 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content')
-            ->add('category')
+            ->add('content', TextareaType::class)
+            ->add('category', null, ['choice_label' => 'name'])
             ->add('tags', EntityType::class, [
             'class' => Tag::class,
-            'choice_label' => 'selector',
+            'choice_label' => 'name',
         ]);
     }
 
