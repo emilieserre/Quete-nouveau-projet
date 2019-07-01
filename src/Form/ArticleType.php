@@ -23,10 +23,12 @@ class ArticleType extends AbstractType
             ->add('content', TextareaType::class)
             ->add('category', null, ['choice_label' => 'name'])
             ->add('tags', EntityType::class, [
-            'class' => Tag::class,
-            'choice_label' => 'name',
-            'multiple' => true,
-        ]);
+                'class' => Tag::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'by_reference' => false,
+                'expanded' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
