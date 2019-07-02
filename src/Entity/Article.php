@@ -87,6 +87,12 @@ class Article
      */
     private $tags;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Category;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
